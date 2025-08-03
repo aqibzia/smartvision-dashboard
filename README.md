@@ -45,11 +45,12 @@ An AI-powered cross-platform web application for managing submicron imaging data
 
 ### 1. Clone & Setup
 ```bash
-git clone https://github.com/your-username/smartvision-ai.git
-cd smartvision-ai
+git clone https://github.com/your-username/smartvision-dashboard.git
+cd smartvision-dashboard
 cp .env.example .env  # then fill in JWT_SECRET and DB configs
+```
 
-2. Start with Docker
+### 2. Start with Docker
 
 docker compose up --build
 
@@ -63,21 +64,16 @@ Backend: http://localhost:5000/api
 | GET    | `/api/auth/me`       | ✅         | Get user profile (token) |
 
 
-✨ Future Roadmap
+### ✨ Future Roadmap
 🔗 AI inference engine integration (ONNX, TensorFlow Serving)
-
 ☁️ Cloud upload (S3, Azure Blob)
-
 📈 Data export + advanced charts
-
 🧪 Unit tests with Jest + Supertest
-
 🧠 Role-based access control
 
-📸 Screenshots
+### 📸 Screenshots
 Coming soon...
 
-🧑‍💻 Author
+### 🧑‍💻 Author
 Md Aqib Zia
-
 Full-Stack Developer | AI + Visualization + Security
