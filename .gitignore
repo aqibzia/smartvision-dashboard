@@ -1,0 +1,27 @@
+# Node modules
+**/node_modules/
+
+# dotenv files
+.env
+.env.local
+
+# Log files
+*.log
+logs/
+npm-debug.log*
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Gitpod
+.gitpod/
+
+# OS/Editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Build output
+**/dist/
+**/build/

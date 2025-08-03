@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  client:
+    build: ./client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+    working_dir: /app
+    command: npm run dev
+
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+    working_dir: /app
+    command: npm run dev
+    environment:
+      - DB_URL=postgresql://sv_user:sv_pass_321@db:5432/smartvision
+      - JWT_SECRET=7439fc1bc56d56d2f05486e8c337f4eaab47750834c8713675d8e862f91089883684c766f2c406567af4f7825b99e00b407e64ff9e8a7eaa05aabc7c3539b145
+
+  db:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: sv_user
+      POSTGRES_PASSWORD: sv_pass_321
+      POSTGRES_DB: smartvision
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
