@@ -1,6 +1,6 @@
-# 🔬 SmartVision AI Imaging Dashboard
+# 🧠 SmartVision Dashboard
 
-An AI-powered cross-platform web application for managing submicron imaging datasets, integrating real-time ML inference, and supporting secure user access.
+A secure, full-stack web application built for managing and visualizing AI-powered submicron imaging data. Designed for scientific research use cases where high-performance and real-time analysis are critical.
 
 ---
 
@@ -14,11 +14,19 @@ An AI-powered cross-platform web application for managing submicron imaging data
 ### Backend
 - Node.js + Express
 - RESTful APIs
+- TypeScript
+- Prisma ORM
 - JWT Auth + SSL + Encrypted Storage
 
 ### Database
 - PostgreSQL (via Docker)
 - Redis (caching) [coming soon]
+
+### Auth/Security
+- JWT
+- Bcrypt
+- CORS
+- Rate-Limiting
 
 ### Visualization
 - D3.js (2D analytics)
@@ -38,6 +46,8 @@ An AI-powered cross-platform web application for managing submicron imaging data
 - 📊 Visualize structured 2D/3D imaging data
 - ⚡ Fast image uploads + dataset management
 - 🐳 Fully containerized with PostgreSQL backend
+- PostgreSQL integration using Prisma ORM
+- Modular TypeScript-based API
 
 ---
 
@@ -63,17 +73,31 @@ Backend: http://localhost:5000/api
 | POST   | `/api/auth/login`    | ❌         | Login & get JWT token    |
 | GET    | `/api/auth/me`       | ✅         | Get user profile (token) |
 
+### 🛠️ Prisma (Database ORM)
+Run Migrations
 
-### ✨ Future Roadmap
-🔗 AI inference engine integration (ONNX, TensorFlow Serving)
-☁️ Cloud upload (S3, Azure Blob)
-📈 Data export + advanced charts
-🧪 Unit tests with Jest + Supertest
-🧠 Role-based access control
+```bash
+npx prisma migrate dev --name init
+```
 
-### 📸 Screenshots
-Coming soon...
+Open Prisma Studio (GUI)
+
+```bash
+npx prisma studio
+```
+
+
+
+### ✨ ToDo Roadmap
+✅  Set up secure auth (JWT, bcrypt)
+✅  Docker + Gitpod dev setup
+✅ PostgreSQL integration
+Real-time AI model integration
+Scientific image visualization (3D, point cloud)
+Role-based access (admin/researcher)
+Email notifications & password reset
+
 
 ### 🧑‍💻 Author
 Md Aqib Zia
-Full-Stack Developer | AI + Visualization + Security
+Full-Stack Developer | AI
