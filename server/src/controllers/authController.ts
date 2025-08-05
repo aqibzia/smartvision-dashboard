@@ -15,7 +15,7 @@ export const register = async (req: Request, res: Response) => {
   try {
     const existingUser = await prisma.user.findUnique({ where: { email } });
 
-    if (existingUser.rows.length > 0) {
+    if (existingUser) {
       return res.status(409).json({ message: 'Email already in use' });
     }
 
@@ -26,15 +26,13 @@ export const register = async (req: Request, res: Response) => {
       select: { id: true, name: true, email: true }
     });
 
-    const user = newUser.rows[0];
-
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      { id: newUser.id, email: newUser.email },
       process.env.JWT_SECRET as string,
       { expiresIn: '1d' }
     );
 
-    res.status(201).json({ user, token });
+    res.status(201).json({ user: newUser, token });
   } catch (err: any) {
     console.error('❌ Register Error:', err.message);
     res.status(500).json({ message: 'Internal server error' });
@@ -45,8 +43,7 @@ export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    const result = await prisma.user.findUnique({ where: { email } });
-    const user = result.rows[0];
+    const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) return res.status(404).json({ message: 'User not found' });
 

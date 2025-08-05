@@ -1,18 +1,25 @@
-# Use Node.js LTS
 FROM node:18
 
-# Set working directory inside container
+# Create app directory
 WORKDIR /app
 
-# Copy package.json and install deps
-COPY package.json package-lock.json ./
+# Install app dependencies
+COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the app
+# Copy source files
 COPY . .
 
-# Expose Vite dev server port
+RUN npm install --save-dev vite
+
+# Set permissions
+RUN chown -R node:node /app
+
+# Switch to non-root user
+USER node
+
+# Expose Vite dev port
 EXPOSE 5173
 
-# Run the dev server
+# Start dev server
 CMD ["npm", "run", "dev"]

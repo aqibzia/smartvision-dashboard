@@ -7,8 +7,12 @@ services:
       - "5173:5173"
     volumes:
       - ./client:/app
+      - /app/node_modules
+      - ./client/.vite:/app/.vite
     working_dir: /app
     command: npm run dev
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
   server:
     build: ./server

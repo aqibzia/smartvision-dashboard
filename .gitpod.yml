@@ -1,0 +1,12 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Start dev servers
+    command: docker-compose up --build
+
+ports:
+  - port: 5173
+    onOpen: open-preview
+  - port: 5000
+    onOpen: notify
