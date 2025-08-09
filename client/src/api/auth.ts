@@ -1,4 +1,4 @@
-const BASE_URL = "https://5000-aqibzia-smartvisiondash-h7m5w4d7jz3.ws-us120.gitpod.io/api" // import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = "https://5000-aqibzia-smartvisiondash-l057to5vueu.ws-us120.gitpod.io/api" // import.meta.env.VITE_API_BASE_URL;
 
 export const register = async (data: {
   name: string;
@@ -8,7 +8,6 @@ export const register = async (data: {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
     body: JSON.stringify(data),
   });
 

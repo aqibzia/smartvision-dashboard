@@ -7,11 +7,12 @@ import { globalLimiter } from './middleware/rateLimiter';
 dotenv.config();
 const app = express();
 
-app.use(
-  cors({
-    origin: '*',
-  })
-);
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || '*', // Allow all origins or specify your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

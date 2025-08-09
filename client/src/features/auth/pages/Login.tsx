@@ -1,13 +1,17 @@
 import {
   Box, Button, Input, FormControl, FormLabel, Heading, VStack, useToast
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { login } from '@/api/auth';
+import { useAuth } from '@/context/AuthContext';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -15,9 +19,22 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // integrate auth API
-    toast({ title: 'Login successful', status: 'success', isClosable: true });
-    navigate('/profile');
+    setLoading(true);
+    try {
+      const res = await login(form?.email, form?.password);
+      toast({ title: 'Login successful', status: 'success', isClosable: true });
+      navigate('/dashboard');
+    } catch(e) {
+      toast({
+        title: 'Error',
+        description: 'Login failed',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +50,7 @@ const Login = () => {
             <FormLabel>Password</FormLabel>
             <Input name="password" type="password" onChange={handleChange} />
           </FormControl>
-          <Button width="full" colorScheme="teal" type="submit">Log In</Button>
+          <Button width="full" colorScheme="teal" type="submit" isLoading={loading}>Log In</Button>
         </VStack>
       </Box>
     </Box>

@@ -5,6 +5,8 @@ import Profile from '@/features/auth/pages/Profile';
 import NotFound from '@/pages/NotFound';
 import Dashboard from '@/features/dashboard/Dashboard';
 import Landing from './Landing';
+import ImageUpload from './ImageUpload';
+import PrivateRoute from '@/components/PrivateRoute';
 import { isAuthenticated } from '@/utils/auth';
 
 const AppRoutes = () => {
@@ -17,8 +19,9 @@ const AppRoutes = () => {
       <Route path="*" element={<NotFound />} />
       <Route
           path="/dashboard"
-          element={isAuthenticated() ? <Dashboard /> : <Navigate to="/" />}
+          element={<PrivateRoute><Dashboard /></PrivateRoute>}
         />
+      <Route path="/upload" element={<PrivateRoute><ImageUpload /></PrivateRoute>} />
     </Routes>
   );
 };
